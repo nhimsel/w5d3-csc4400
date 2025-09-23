@@ -2,7 +2,14 @@ import java.lang.Math;
 
 class Main {
     public static void main(String[] args) {
-        int[] arr = RandomizedArray(-300000, 300000, 600001);
+        //int[] arr = RandomizedArray(-300000, 300000, 600001);
+        int[] arr = RandomizedArray(7,3,12);
+        printArr(arr);
+        System.out.println();
+        Selection.Sort(arr,true);
+        printArr(arr);
+        System.out.println();
+        Selection.Sort(arr,false);
         printArr(arr);
     }
 
@@ -42,8 +49,45 @@ class Main {
     }
 }
 
-class SelSort {
+class Selection {
+    public static int[] Sort(int[] arr, boolean ascending) {
+        int cur, tpos, tmp;
+        if (ascending) {
+            for (int pos=0; pos<arr.length-1; pos++) {
+                cur = arr[pos]; 
+                tpos=pos;
+                for (int i=pos+1; i<arr.length; i++) {
+                    if (arr[i]<cur) {
+                        cur = arr[i];
+                        tpos=i;
+                    }
+                }
+                tmp = arr[tpos];
+                arr[tpos]=arr[pos];
+                arr[pos]=tmp;
+            }
+        }
+        else{
+            for (int pos=0; pos<arr.length-1; pos++) {
+                cur = arr[pos]; 
+                tpos=pos;
+                for (int i=pos+1; i<arr.length; i++) {
+                    if (arr[i]>cur) {
+                        cur = arr[i];
+                        tpos=i;
+                    }
+                }
+                tmp = arr[tpos];
+                arr[tpos]=arr[pos];
+                arr[pos]=tmp;
+            }
+        }
+        return arr;
+    }
 }
 
-class BubSort {
+class Bubble {
+    public static int[] Sort(int[] arr, boolean ascending) {
+        return arr;
+    }
 }
