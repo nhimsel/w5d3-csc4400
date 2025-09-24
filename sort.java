@@ -6,10 +6,10 @@ class Main {
         int[] arr = RandomizedArray(7,3,12);
         printArr(arr);
         System.out.println();
-        Selection.Sort(arr,true);
+        Bubble.Sort(arr,true);
         printArr(arr);
         System.out.println();
-        Selection.Sort(arr,false);
+        Bubble.Sort(arr,false);
         printArr(arr);
     }
 
@@ -68,6 +68,7 @@ class Selection {
             }
         }
         else{
+            //decending order
             for (int pos=0; pos<arr.length-1; pos++) {
                 cur = arr[pos]; 
                 tpos=pos;
@@ -88,6 +89,31 @@ class Selection {
 
 class Bubble {
     public static int[] Sort(int[] arr, boolean ascending) {
+        if (ascending) {
+            int tpos, tval, tmp;
+            for (int i=0; i<arr.length-1; i++) {
+                for (int j=0; j<arr.length-1; j++) {
+                    if (arr[j]>arr[j+1]) {
+                        tmp = arr[j+1];
+                        arr[j+1]=arr[j];
+                        arr[j]=tmp;
+                    }
+                }
+            }
+        }
+        else {
+            //decending order
+            int tpos, tval, tmp;
+            for (int i=0; i<arr.length-1; i++) {
+                for (int j=0; j<arr.length-1; j++) {
+                    if (arr[j]<arr[j+1]) {
+                        tmp = arr[j+1];
+                        arr[j+1]=arr[j];
+                        arr[j]=tmp;
+                    }
+                }
+            }
+        }
         return arr;
     }
 }
