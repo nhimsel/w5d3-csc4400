@@ -2,15 +2,32 @@ import java.lang.Math;
 
 class Main {
     public static void main(String[] args) {
-        //int[] arr = RandomizedArray(-300000, 300000, 600001);
-        int[] arr = RandomizedArray(7,3,12);
-        printArr(arr);
-        System.out.println();
-        Bubble.Sort(arr,true);
-        printArr(arr);
-        System.out.println();
-        Bubble.Sort(arr,false);
-        printArr(arr);
+        int arrsize = 100000;
+        boolean ascending = true;
+        int[] arr = RandomizedArray(arrsize, -1000000, 1000000);
+        //printArr(arr);
+
+        int[] bubarr = arr.clone();
+        int[] obubarr = arr.clone();
+        int[] selarr = arr.clone();
+
+        long selstart = System.currentTimeMillis();
+        Selection.Sort(selarr,ascending);
+        long selfin = System.currentTimeMillis();
+
+        //printArr(selarr);
+        long seltime = selfin-selstart;
+        System.out.println("Sorting a random array size of "+arrsize+" took Selection Sort "+seltime+"ms to complete.");
+        System.out.println("the array was sorted correctly: "+checkSort(selarr,ascending));
+
+        long bubstart = System.currentTimeMillis();
+        Bubble.Sort(bubarr,ascending);
+        long bubfin = System.currentTimeMillis();
+
+        //printArr(bubarr);
+        long bubtime = bubfin-bubstart;
+        System.out.println("Sorting a random array size of "+arrsize+" took Bubble Sort "+bubtime+"ms to complete.");
+        System.out.println("the array was sorted correctly: "+checkSort(bubarr, ascending));
     }
 
     //gen random arr with unique values
@@ -46,40 +63,45 @@ class Main {
         for (int i:arr) {
             System.out.print(i+"//");
         }
+        System.out.println();
+    }
+
+    private static boolean checkSort(int[] arr, boolean ascending) {
+        if (ascending) {
+            for (int i=1; i<arr.length; i++)
+                if (arr[i-1] > arr[i]) return false;
+        }
+        else{
+            for (int i=1; i<arr.length; i++)
+                if (arr[i-1] < arr[i]) return false;
+        }
+        return true;
     }
 }
 
 class Selection {
     public static int[] Sort(int[] arr, boolean ascending) {
-        int cur, tpos, tmp;
+        int mindex, tmp;
         if (ascending) {
             for (int pos=0; pos<arr.length-1; pos++) {
-                cur = arr[pos]; 
-                tpos=pos;
+                mindex=pos;
                 for (int i=pos+1; i<arr.length; i++) {
-                    if (arr[i]<cur) {
-                        cur = arr[i];
-                        tpos=i;
-                    }
+                    if (arr[i]<arr[mindex]) mindex=i;
                 }
-                tmp = arr[tpos];
-                arr[tpos]=arr[pos];
+                tmp = arr[mindex];
+                arr[mindex]=arr[pos];
                 arr[pos]=tmp;
             }
         }
         else{
-            //decending order
+            //descending order
             for (int pos=0; pos<arr.length-1; pos++) {
-                cur = arr[pos]; 
-                tpos=pos;
+                mindex=pos;
                 for (int i=pos+1; i<arr.length; i++) {
-                    if (arr[i]>cur) {
-                        cur = arr[i];
-                        tpos=i;
-                    }
+                    if (arr[i]>arr[mindex])  mindex=i;
                 }
-                tmp = arr[tpos];
-                arr[tpos]=arr[pos];
+                tmp = arr[mindex];
+                arr[mindex]=arr[pos];
                 arr[pos]=tmp;
             }
         }
@@ -89,10 +111,10 @@ class Selection {
 
 class Bubble {
     public static int[] Sort(int[] arr, boolean ascending) {
+        int tmp;
         if (ascending) {
-            int tpos, tval, tmp;
             for (int i=0; i<arr.length-1; i++) {
-                for (int j=0; j<arr.length-1; j++) {
+                for (int j=0; j<arr.length-1-i; j++) {
                     if (arr[j]>arr[j+1]) {
                         tmp = arr[j+1];
                         arr[j+1]=arr[j];
@@ -102,10 +124,9 @@ class Bubble {
             }
         }
         else {
-            //decending order
-            int tpos, tval, tmp;
+            //descending order
             for (int i=0; i<arr.length-1; i++) {
-                for (int j=0; j<arr.length-1; j++) {
+                for (int j=0; j<arr.length-1-i; j++) {
                     if (arr[j]<arr[j+1]) {
                         tmp = arr[j+1];
                         arr[j+1]=arr[j];
