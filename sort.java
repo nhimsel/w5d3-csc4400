@@ -5,16 +5,15 @@ class Main {
         int arrsize = 100000;
         boolean ascending = true;
         int[] arr = RandomizedArray(arrsize, -1000000, 1000000);
-        //printArr(arr);
 
         int[] bubarr = arr.clone();
         int[] selarr = arr.clone();
+        int[] insarr = arr.clone();
 
         long selstart = System.currentTimeMillis();
         Sort.Selection(selarr,ascending);
         long selfin = System.currentTimeMillis();
 
-        //printArr(selarr);
         long seltime = selfin-selstart;
         System.out.println("Sorting a random array size of "+arrsize+" took Selection Sort "+seltime+"ms to complete.");
         System.out.println("the array was sorted correctly: "+checkSort(selarr,ascending));
@@ -23,10 +22,17 @@ class Main {
         Sort.Bubble(bubarr,ascending);
         long bubfin = System.currentTimeMillis();
 
-        //printArr(bubarr);
         long bubtime = bubfin-bubstart;
         System.out.println("Sorting a random array size of "+arrsize+" took Bubble Sort "+bubtime+"ms to complete.");
         System.out.println("the array was sorted correctly: "+checkSort(bubarr, ascending));
+
+        long insstart = System.currentTimeMillis();
+        Sort.Insertion(insarr, ascending);
+        long insfin = System.currentTimeMillis();
+
+        long instime = insfin-insstart;
+        System.out.println("Sorting a random array size of "+arrsize+" took Insertion Sort "+instime+"ms to complete.");
+        System.out.println("the array was sorted correctly: "+checkSort(insarr, ascending));
     }
 
     //gen random arr with unique values
@@ -127,6 +133,33 @@ class Sort {
                     if (arr[j]<arr[j+1]) {
                         tmp = arr[j+1];
                         arr[j+1]=arr[j];
+                        arr[j]=tmp;
+                    }
+                }
+            }
+        }
+        return arr;
+    }
+
+    public static int[] Insertion(int[] arr, boolean ascending) {
+        int tmp;
+        if (ascending) {
+            for (int i=0; i<arr.length; i++) {
+                for (int j=i; j>0; j--) {
+                    if (arr[j]<arr[j-1]) {
+                        tmp = arr[j-1];
+                        arr[j-1]=arr[j];
+                        arr[j]=tmp;
+                    }
+                }
+            }
+        }
+        else{
+            for (int i=0; i<arr.length; i++) {
+                for (int j=i; j>0; j--) {
+                    if (arr[j]>arr[j-1]) {
+                        tmp = arr[j-1];
+                        arr[j-1]=arr[j];
                         arr[j]=tmp;
                     }
                 }
