@@ -8,11 +8,10 @@ class Main {
         //printArr(arr);
 
         int[] bubarr = arr.clone();
-        int[] obubarr = arr.clone();
         int[] selarr = arr.clone();
 
         long selstart = System.currentTimeMillis();
-        Selection.Sort(selarr,ascending);
+        Sort.Selection(selarr,ascending);
         long selfin = System.currentTimeMillis();
 
         //printArr(selarr);
@@ -21,7 +20,7 @@ class Main {
         System.out.println("the array was sorted correctly: "+checkSort(selarr,ascending));
 
         long bubstart = System.currentTimeMillis();
-        Bubble.Sort(bubarr,ascending);
+        Sort.Bubble(bubarr,ascending);
         long bubfin = System.currentTimeMillis();
 
         //printArr(bubarr);
@@ -79,8 +78,8 @@ class Main {
     }
 }
 
-class Selection {
-    public static int[] Sort(int[] arr, boolean ascending) {
+class Sort {
+    public static int[] Bubble(int[] arr, boolean ascending) {
         int mindex, tmp;
         if (ascending) {
             for (int pos=0; pos<arr.length-1; pos++) {
@@ -107,10 +106,8 @@ class Selection {
         }
         return arr;
     }
-}
 
-class Bubble {
-    public static int[] Sort(int[] arr, boolean ascending) {
+    public static int[] Selection(int[] arr, boolean ascending) {
         int tmp;
         if (ascending) {
             for (int i=0; i<arr.length-1; i++) {
