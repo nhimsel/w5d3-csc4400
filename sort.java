@@ -85,7 +85,7 @@ class Main {
 }
 
 class Sort {
-    public static int[] Bubble(int[] arr, boolean ascending) {
+    public static int[] Selection(int[] arr, boolean ascending) {
         int mindex, tmp;
         if (ascending) {
             for (int pos=0; pos<arr.length-1; pos++) {
@@ -113,7 +113,7 @@ class Sort {
         return arr;
     }
 
-    public static int[] Selection(int[] arr, boolean ascending) {
+    public static int[] Bubble(int[] arr, boolean ascending) {
         int tmp;
         if (ascending) {
             for (int i=0; i<arr.length-1; i++) {
