@@ -142,27 +142,31 @@ class Sort {
     }
 
     public static int[] Insertion(int[] arr, boolean ascending) {
-        int tmp;
+        // rewrite so it shifts. don't swap every time. save the key 
+        // and insert once the correct position is found
+        int key, tpos;
         if (ascending) {
-            for (int i=0; i<arr.length; i++) {
-                for (int j=i; j>0; j--) {
-                    if (arr[j]<arr[j-1]) {
-                        tmp = arr[j-1];
-                        arr[j-1]=arr[j];
-                        arr[j]=tmp;
+            for (int i=1; i<arr.length; i++) {
+                key = arr[i];
+                for (tpos=i-1; tpos>=0; tpos--) {
+                    if (arr[tpos]>key) {
+                        arr[tpos+1]=arr[tpos];
                     }
+                    else break;
                 }
+                arr[tpos+1] = key;
             }
         }
         else{
-            for (int i=0; i<arr.length; i++) {
-                for (int j=i; j>0; j--) {
-                    if (arr[j]>arr[j-1]) {
-                        tmp = arr[j-1];
-                        arr[j-1]=arr[j];
-                        arr[j]=tmp;
+            for (int i=1; i<arr.length; i++) {
+                key = arr[i];
+                for (tpos=i-1; tpos>=0; tpos--) {
+                    if (arr[tpos]<key) {
+                        arr[tpos+1]=arr[tpos];
                     }
+                    else break;
                 }
+                arr[tpos+1] = key;
             }
         }
         return arr;
