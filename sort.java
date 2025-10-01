@@ -142,8 +142,6 @@ class Sort {
     }
 
     public static int[] Insertion(int[] arr, boolean ascending) {
-        // rewrite so it shifts. don't swap every time. save the key 
-        // and insert once the correct position is found
         int key, tpos;
         if (ascending) {
             for (int i=1; i<arr.length; i++) {
